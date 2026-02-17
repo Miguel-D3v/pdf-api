@@ -1,8 +1,8 @@
 import express from 'express';
 import multer from 'multer';       
-import { convertController } from '../controllers/convert_controller.js';
+import { convertController } from '../controllers/convertImage.js';
 
-const router = express.Router();
+
 const upload = multer({ 
     dest: 'uploads/',
     limits :{
@@ -10,6 +10,7 @@ const upload = multer({
         fileSize: 5 * 1024 * 1024
     }
  });
+const router = express.Router();
 
 router.post('/convert', upload.array('files',5), convertController);
 
