@@ -2,6 +2,15 @@ import sharp from "sharp";
 import { PDFDocument } from "pdf-lib";
 import fs from "fs/promises";
 import path from "path";
+import { OUTPUT_DIR } from "../server.js";
+import path from "path";
+
+const outputPath = path.join(
+  OUTPUT_DIR,
+  `${filename}.pdf`
+);
+
+await fs.writeFile(outputPath, pdfBuffer);
 
 export const convertToPDF = async (imagePath) => {
   try {
