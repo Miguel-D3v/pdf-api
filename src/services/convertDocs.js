@@ -5,7 +5,10 @@ export const convertDocs = (docPath) => {
   return new Promise((resolve, reject) => {
 
     const sofficePath =
-      'C:\\Program Files\\LibreOffice\\program\\soffice.exe';
+      process.platform === "win32"
+        ? "C:\\Program Files\\LibreOffice\\program\\soffice.exe"
+        : "soffice";
+
 
     const outputDir = path.resolve('output');
 
