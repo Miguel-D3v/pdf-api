@@ -2,23 +2,17 @@ import sharp from "sharp";
 import { PDFDocument } from "pdf-lib";
 import fs from "fs/promises";
 import path from "path";
-import { OUTPUT_DIR } from "../server.js";
-import path from "path";
-
-const outputPath = path.join(
-  OUTPUT_DIR,
-  `${filename}.pdf`
-);
-
-await fs.writeFile(outputPath, pdfBuffer);
 
 export const convertToPDF = async (imagePath) => {
   try {
 
+    
     const outputDir = path.resolve("output");
 
+    
     await fs.mkdir(outputDir, { recursive: true });
 
+  
     const imageBuffer = await sharp(imagePath)
       .png()
       .toBuffer();
@@ -39,6 +33,8 @@ export const convertToPDF = async (imagePath) => {
     });
 
     const pdfBytes = await pdfDoc.save();
+
+  
     const fileName = path.parse(imagePath).name + ".pdf";
     const outputPath = path.join(outputDir, fileName);
 
