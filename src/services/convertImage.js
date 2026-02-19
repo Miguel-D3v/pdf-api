@@ -1,36 +1,42 @@
 import sharp from "sharp";
 import { PDFDocument } from "pdf-lib";
-import fs from "fs";    
+import fs from "fs/promises";
 import path from "path";
 
 export const convertToPDF = async (imagePath) => {
   try {
 
+    const outputDir = path.resolve("output");
+
+    await fs.mkdir(outputDir, { recursive: true });
+
     const imageBuffer = await sharp(imagePath)
-    .png()
-    .toBuffer();
- 
+      .png()
+      .toBuffer();
+
     const pdfDoc = await PDFDocument.create();
     const image = await pdfDoc.embedPng(imageBuffer);
 
     const page = pdfDoc.addPage([
-        image.width, 
-        image.height
+      image.width,
+      image.height
     ]);
+
     page.drawImage(image, {
-        x: 0,
-        y: 0,
-        width: image.width,
-        height: image.height
+      x: 0,
+      y: 0,
+      width: image.width,
+      height: image.height
     });
 
     const pdfBytes = await pdfDoc.save();
-    const outputPath = path.join(
-        'output',
-        path.basename(imagePath) + '.pdf'
-    );
-    await fs.promises.writeFile(outputPath, pdfBytes);
+    const fileName = path.parse(imagePath).name + ".pdf";
+    const outputPath = path.join(outputDir, fileName);
+
+    await fs.writeFile(outputPath, pdfBytes);
+
     return outputPath;
+
   } catch (error) {
     console.error("Error converting image to PDF:", error);
     throw error;
