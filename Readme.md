@@ -66,6 +66,9 @@ src/
 ```
 
 ---
+## 🌐 API Health Check
+
+[Access API](https://pdf-api-4p86.onrender.com/health)
 
 ## 📡 Endpoints
 
