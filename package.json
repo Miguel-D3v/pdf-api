@@ -13,8 +13,13 @@
   "type": "module",
   "dependencies": {
     "archiver": "^7.0.1",
+    "cors": "^2.8.6",
     "dotenv": "^17.2.4",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
+    "hpp": "^0.2.3",
+    "morgan": "^1.10.1",
     "multer": "^2.0.2",
     "pdf-lib": "^1.17.1",
     "sharp": "^0.34.5"
