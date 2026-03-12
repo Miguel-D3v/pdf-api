@@ -4,11 +4,11 @@ import joinPdfRoutes from './routes/joinPdfRoutes.js';
 
 const app = express();
 
-app.get('/health', (req, res) => {
+
+app.use("/api/v1",convertRoutes);
+app.use("/api/v1",joinPdfRoutes)
+app.get("/api/v1/health", (req, res) => {
   res.json({ message: 'ok' });
 });
-app.use(convertRoutes);
-app.use(joinPdfRoutes)
-
 
 export default app;
