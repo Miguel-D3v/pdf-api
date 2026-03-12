@@ -14,6 +14,7 @@ export function uploadMiddleware(req, res, next) {
   });
 
   let fileBuffer = [];
+  let originalName = null;
   let hasError = false;
 
   busboy.on("filesLimit", () => {
@@ -24,7 +25,9 @@ export function uploadMiddleware(req, res, next) {
     req.unpipe(busboy);
   });
 
-  busboy.on("file", (fieldname, file) => {
+  busboy.on("file", (fieldname, file , info) => {
+    originalName = info.filename;
+
     file.on("limit", () => {
       hasError = true;
       return res.status(413).json({
@@ -60,6 +63,7 @@ export function uploadMiddleware(req, res, next) {
     req.file = {
       buffer,
       mimeType: detectedType.mime,
+      originalName,
     };
 
     next();
