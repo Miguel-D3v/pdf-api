@@ -13,7 +13,7 @@ export const swaggerSpec = swaggerJsdoc({
     servers: [
       {
         url: isProd
-          ? "https://pdf-api-n32o.onrender.com/api/v1/"
+          ? "https://pdf-api-n32o.onrender.com/api/v1"
           : "http://localhost:3000/api/v1",
         description: isProd ? "Production" : "Local",
       },
