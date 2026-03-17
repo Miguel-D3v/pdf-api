@@ -1,8 +1,6 @@
 import { convertImageBufferToPDF } from "../services/convertImage.js";
+import { removeExtension } from "../utils/removeExtension.js";
 
-function removeExtension(filename) {
-  return filename.replace(/\.[^/.]+$/, "");
-}
 
 export async function convertImage(req, res) {
   try {
