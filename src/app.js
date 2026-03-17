@@ -1,6 +1,7 @@
 import express from "express";
 import convertRoutes from "./routes/convertRoutes.js";
 import joinPdfRoutes from "./routes/joinPdfRoutes.js";
+import errorHandler from "./middlewares/errorHandler.js";
 
 const app = express();
 
@@ -11,5 +12,12 @@ app.get("/api/v1/health", (req, res) => {
   res.json({ message: "ok" });
 });
 
+app.use((req, res, next) => {
+  const err = new Error('Rota não encontrada');
+  err.status = 404;
+  next(err);
+});
+
+app.use(errorHandler);
 
 export default app;
