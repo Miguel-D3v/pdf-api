@@ -7,9 +7,10 @@ import helmet from "helmet";
 import { ipLimiter } from "./middlewares/rateLimit.js";
 
 const app = express();
+app.use(cors({ origin: "*", methods: ["GET","POST","OPTIONS"] }))
+app.options(/.*/, cors()); // Habilita CORS para todas as rotas e métodos
 app.set("trust proxy", 1); // Habilita o trust proxy para obter o IP real do cliente
 app.disable("x-powered-by");
-app.use(cors());
 app.use(helmet());
 app.use(express.json());
 app.use("/api/v1", ipLimiter, convertRoutes);
